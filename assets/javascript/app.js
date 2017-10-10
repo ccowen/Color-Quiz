@@ -4,6 +4,7 @@ var answersRight = 0;
 var answersWrong = 0;
 var unanswered = 0;
 var questionNumber = 0;
+var startButton;
 
 // ---------------------- variables from easy function
 var answerChoices = [];
@@ -22,6 +23,7 @@ function generateRandomColor() {
 
 // question array, ten questions total
 var questionArray = [
+
 	generateRandomColor(),
 	generateRandomColor(),
 	generateRandomColor(),
@@ -32,15 +34,19 @@ var questionArray = [
 	generateRandomColor(),
 	generateRandomColor(),
 	generateRandomColor()
+
 ];
 
 function getRandomInt(min, max) {
+
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+
 };
 
 function hexToRgb(hex) {
+
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
     hex = hex.replace(shorthandRegex, function(m, r, g, b) {
@@ -53,7 +59,22 @@ function hexToRgb(hex) {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16)
     } : null;
+
 }
+
+function startScreen() {
+
+	startButton = "<p class='startClickEvent'><a href='#'>Start Quiz</a></p>";
+	$("#startStop").html(startButton);
+
+}
+
+startScreen();
+
+$(".startClickEvent").on("click", function(event){
+	$("#startStop").empty();
+	easyLevelQuestion(questionNumber);
+});
 
 function easyLevelQuestion(x) {
 
@@ -107,7 +128,7 @@ function easyLevelQuestion(x) {
 
 console.log(questionArray);
 
-easyLevelQuestion(0);
+// -------------------------------------- answer click event -----------------
 
 $("body").on("click", ".color", function(event){
 
@@ -116,7 +137,6 @@ $("body").on("click", ".color", function(event){
 		alert("correct");
 		//clearInterval(theClock);
 		answersRight++;
-
 	}
 
 	else {
@@ -134,18 +154,19 @@ $("body").on("click", ".color", function(event){
 
 /* function reset() {
 
+}; 
+
+function finalScore(){
+	
 };
-
-function initialScreen() {
-
-}
-
-initialScreen(); 
 
 
 function LossDueToTimeOut() {
 	unanswered++;
-} */
+} 
+*/
+
+
 
 function nextQuestion() {
 
@@ -163,9 +184,13 @@ function nextQuestion() {
 
 		else if (answersRight < 7) {
 
+			easyLevelQuestion(questionNumber);
+
 		}
 
 		else if (answersRight < 9) {
+
+			easyLevelQuestion(questionNumber);
 
 		}
 
@@ -177,5 +202,15 @@ function nextQuestion() {
 	}
 }
 
+function finalScore(){
+	
+	score = "<p class='finalScore'>Here's how you did!</p>";
+	$("#startStop").html(score);
+	$(".color").empty();
+	$("#question").empty();
+
+}
 
 });
+
+
