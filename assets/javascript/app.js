@@ -24,9 +24,9 @@ function getRandomInt(min, max) {
 function generateRandomColor() {
 
 	// random color picker and variables 
-	randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+	randomColorPicker = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
 
-	return randomColor;
+	return randomColorPicker;
 
 };
 
@@ -73,14 +73,16 @@ function easyLevelQuestion(x) {
 
 	// ---------- generate answer choices
 	var answerChoices = [
-		"answerChoice",
-		"answerChoice",
-		"answerChoice",
-		"answerChoice",
-		"answerChoice"
+		"something",
+		"something",
+		"something",
+		"something",
+		"something"
 	];
 
-	var generateCorrectAnswerInteger = getRandomInt(0, 4);
+	var generateCorrectAnswerInteger = getRandomInt(0, 5);
+
+	console.log(generateCorrectAnswerInteger);
 
 	for (var x = 0; x < answerChoices.length; x++) {
 		
@@ -90,21 +92,21 @@ function easyLevelQuestion(x) {
 
 		}
 
-	}
+		else {
 
-	for (var a = 0; a < answerChoices.length; a++) {
+			answerChoices[generateCorrectAnswerInteger] = questionColor;
 
-		answerChoices[generateCorrectAnswerInteger] = questionColor;
+		}
+
+	}	
 	
-	}
 	
-	$("#answer1").text(answerChoices[0]);
+	$("#answer1").css('background-color', answerChoices[0]);
 	$("#answer2").text(answerChoices[1]);
 	$("#answer3").text(answerChoices[2]);
 	$("#answer4").text(answerChoices[3]);
 	$("#answer5").text(answerChoices[4]);
 
-	
 };
 
 
