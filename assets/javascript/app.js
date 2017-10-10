@@ -14,6 +14,12 @@ function initialScreen() {
 
 initialScreen(); */
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
 // function for generating a random color
 function generateRandomColor() {
 
@@ -64,6 +70,35 @@ function easyLevelQuestion(x) {
 	var questionText = ("Pick the matching color: " + randomColor + " (r" + randomColorScoreR + ", g" + randomColorScoreG + ", b" + randomColorScoreB + ")" );
 
 	$("#question").text(questionText);
+
+	// ---------- generate answer choices
+	var answerChoices = [
+		"answerChoice",
+		"answerChoice",
+		"answerChoice",
+		"answerChoice",
+		"answerChoice"
+	];
+
+	var generateCorrectAnswerInteger = getRandomInt(0, 4);
+
+	for (var x = 0; x < answerChoices.length; x++) {
+		
+		if (x !== generateCorrectAnswerInteger) {
+
+			answerChoices[x] = "testing";
+		}
+
+	}
+
+	for (var a = 0; a < answerChoices.length; a++) {
+
+		answerChoices[generateCorrectAnswerInteger] = questionColor;
+	
+	}
+	
+	$("#answers").text(answerChoices);
+
 	
 };
 
@@ -83,7 +118,7 @@ console.log(questionArray);
 // function hardLevelQuestion()
 // function superhardLevelQuestion()
 
-for (var i = 0; i <= questionArray.length; i++) {
+for (var i = 0; i < questionArray.length; i++) {
 	if (answersRight < 4) {
 		easyLevelQuestion(i);
 	}
