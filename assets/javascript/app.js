@@ -2,34 +2,20 @@ $(document).ready(function() {
 
 var answersRight = 0;
 var answersWrong = 0;
+var unanswered = 0;
+var questionNumber = 0;
+
+// ---------------------- variables from easy function
 var answerChoices = [];
 var generateCorrectAnswerInteger;
 var questionColor;
 var questionText;
-
-
-/* function reset() {
-
-};
-
-function initialScreen() {
-
-}
-
-initialScreen(); */
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-}
 
 // function for generating a random color
 function generateRandomColor() {
 
 	// random color picker and variables 
 	randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
-
 	return randomColor;
 
 };
@@ -47,6 +33,12 @@ var questionArray = [
 	generateRandomColor(),
 	generateRandomColor()
 ];
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+};
 
 function hexToRgb(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -113,21 +105,7 @@ function easyLevelQuestion(x) {
 
 };
 
-
-
 console.log(questionArray);
-
-
-// 	answers with colors in them $("#answerdiv").css('background-color', randomColor);
-
-
-// if score exceeds a number make the question harder
-// if, if else, if else, if else
-
-// function easyLevelQuestion()
-// function mediumLevelQuestion()
-// function hardLevelQuestion()
-// function superhardLevelQuestion()
 
 easyLevelQuestion(0);
 
@@ -137,63 +115,67 @@ $("body").on("click", ".color", function(event){
 	if(selectedAnswer === answerChoices[generateCorrectAnswerInteger]) {
 		alert("correct");
 		//clearInterval(theClock);
-		//generateWin();
-
-		//for (var i = 0; i < questionArray.length; i++) {
-
-			if (answersRight < 4) {
-
-				easyLevelQuestion(i);
-				
-			}
-
-			else if (answersRight < 7) {
-
-			}
-			else if (answersRight < 9) {
-
-			}
-
-		//}
+		answersRight++;
 
 	}
 
 	else {
 		alert("wrong answer!");
-		clearInterval(theClock);
-		generateLoss();
+		//clearInterval(theClock);
+		answersWrong++;
 	}
+
+	nextQuestion();
+
 });
 
 
 
 
+/* function reset() {
+
+};
+
+function initialScreen() {
+
+}
+
+initialScreen(); 
 
 
 function LossDueToTimeOut() {
-	answersWrong++;
-	//gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAnswers[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
-	//$(".mainArea").html(gameHTML);
-	setTimeout(wait, 4000);  //  change to 4000 or other amount
+	unanswered++;
+} */
+
+function nextQuestion() {
+
+	if (questionNumber < 9) {
+
+		questionNumber++;
+
+		//generate questions
+
+		if (answersRight < 4) {
+
+			easyLevelQuestion(questionNumber);
+			
+		}
+
+		else if (answersRight < 7) {
+
+		}
+
+		else if (answersRight < 9) {
+
+		}
+
+	}
+
+	else {
+
+		finalScore();
+	}
 }
 
-function generateWin() {
-	answersRight++;
-	//gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Correct! The answer is: " + correctAnswers[questionCounter] + "</p>" + imageArray[questionCounter];
-	//$(".mainArea").html(gameHTML);
-	setTimeout(wait, 4000);  //  change to 4000 or other amount
-}
-
-function generateLoss() {
-	answersWrong++;
-	//gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Wrong! The correct answer is: "+ correctAnswers[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
-	//$(".mainArea").html(gameHTML);
-	setTimeout(wait, 4000); //  change to 4000 or other amount
-}
-
-/*function generateHTML() {
-	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>30</span></p><p class='text-center'>" + questionArray[questionCounter] + "</p><p class='first-answer answer'>A. " + answerArray[questionCounter][0] + "</p><p class='answer'>B. "+answerArray[questionCounter][1]+"</p><p class='answer'>C. "+answerArray[questionCounter][2]+"</p><p class='answer'>D. "+answerArray[questionCounter][3]+"</p>";
-	$(".mainArea").html(gameHTML);
-}*/
 
 });
