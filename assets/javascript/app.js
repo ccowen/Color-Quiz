@@ -2,6 +2,10 @@ $(document).ready(function() {
 
 var answersRight = 0;
 var answersWrong = 0;
+var answerChoices = [];
+var generateCorrectAnswerInteger;
+var questionColor;
+var questionText;
 
 
 /* function reset() {
@@ -24,9 +28,9 @@ function getRandomInt(min, max) {
 function generateRandomColor() {
 
 	// random color picker and variables 
-	randomColorPicker = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+	randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
 
-	return randomColorPicker;
+	return randomColor;
 
 };
 
@@ -61,18 +65,18 @@ function hexToRgb(hex) {
 
 function easyLevelQuestion(x) {
 
-	var questionColor = questionArray[x];
+	questionColor = questionArray[x];
  
 	randomColorScoreR = hexToRgb(questionColor).r;
 	randomColorScoreG = hexToRgb(questionColor).g;
 	randomColorScoreB = hexToRgb(questionColor).b;
 
-	var questionText = ("Pick the matching color: " + questionColor + " (r" + randomColorScoreR + ", g" + randomColorScoreG + ", b" + randomColorScoreB + ")" );
+	questionText = ("Pick the matching color: " + questionColor + " (r" + randomColorScoreR + ", g" + randomColorScoreG + ", b" + randomColorScoreB + ")" );
 
 	$("#question").text(questionText);
 
 	// ---------- generate answer choices
-	var answerChoices = [
+	answerChoices = [
 		"something",
 		"something",
 		"something",
@@ -80,15 +84,15 @@ function easyLevelQuestion(x) {
 		"something"
 	];
 
-	var generateCorrectAnswerInteger = getRandomInt(0, 5);
+	generateCorrectAnswerInteger = getRandomInt(0, 5);
 
 	console.log(generateCorrectAnswerInteger);
 
-	for (var x = 0; x < answerChoices.length; x++) {
+	for (var a = 0; a < answerChoices.length; a++) {
 		
-		if (x !== generateCorrectAnswerInteger) {
+		if (a !== generateCorrectAnswerInteger) {
 
-			answerChoices[x] = "testing";
+			answerChoices[a] = "testing";
 
 		}
 
@@ -125,20 +129,71 @@ console.log(questionArray);
 // function hardLevelQuestion()
 // function superhardLevelQuestion()
 
-for (var i = 0; i < questionArray.length; i++) {
-	if (answersRight < 4) {
-		easyLevelQuestion(i);
-	}
-	else if (answersRight < 7) {
+easyLevelQuestion(0);
+
+$("body").on("click", ".color", function(event){
+
+	selectedAnswer = $(this).text();
+	if(selectedAnswer === answerChoices[generateCorrectAnswerInteger]) {
+		alert("correct");
+		//clearInterval(theClock);
+		//generateWin();
+
+		//for (var i = 0; i < questionArray.length; i++) {
+
+			if (answersRight < 4) {
+
+				easyLevelQuestion(i);
+				
+			}
+
+			else if (answersRight < 7) {
+
+			}
+			else if (answersRight < 9) {
+
+			}
+
+		//}
 
 	}
-	else if (answersRight < 9) {
 
+	else {
+		alert("wrong answer!");
+		clearInterval(theClock);
+		generateLoss();
 	}
+});
 
 
 
+
+
+
+function LossDueToTimeOut() {
+	answersWrong++;
+	//gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>You ran out of time!  The correct answer was: " + correctAnswers[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
+	//$(".mainArea").html(gameHTML);
+	setTimeout(wait, 4000);  //  change to 4000 or other amount
 }
 
+function generateWin() {
+	answersRight++;
+	//gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Correct! The answer is: " + correctAnswers[questionCounter] + "</p>" + imageArray[questionCounter];
+	//$(".mainArea").html(gameHTML);
+	setTimeout(wait, 4000);  //  change to 4000 or other amount
+}
+
+function generateLoss() {
+	answersWrong++;
+	//gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + counter + "</span></p>" + "<p class='text-center'>Wrong! The correct answer is: "+ correctAnswers[questionCounter] + "</p>" + "<img class='center-block img-wrong' src='img/x.png'>";
+	//$(".mainArea").html(gameHTML);
+	setTimeout(wait, 4000); //  change to 4000 or other amount
+}
+
+/*function generateHTML() {
+	gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>30</span></p><p class='text-center'>" + questionArray[questionCounter] + "</p><p class='first-answer answer'>A. " + answerArray[questionCounter][0] + "</p><p class='answer'>B. "+answerArray[questionCounter][1]+"</p><p class='answer'>C. "+answerArray[questionCounter][2]+"</p><p class='answer'>D. "+answerArray[questionCounter][3]+"</p>";
+	$(".mainArea").html(gameHTML);
+}*/
 
 });
