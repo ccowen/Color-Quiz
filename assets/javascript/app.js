@@ -39,8 +39,8 @@ $(document).ready(function() {
 		];
 
 		for (var i = 0; i < 10; i++) {
-			$("#q" + [i]+ "Box").css('background-color', "");
-			$("#q" + [i]+ "BoxSmall").css('background-color', "");
+			$("#q" + [i] + "Box").css('background-color', "");
+			$("#q" + [i] + "BoxSmall").css('background-color', "");
 		}
 
 	};
@@ -91,14 +91,12 @@ $(document).ready(function() {
 
 	];
 
-	console.log(questionArray);
-
 	function startScreen() {
 
 		startButton = "<p class='startClickEvent'><a href='#'>Start Quiz</a></p>";
 		$("#startStop").html(startButton);
 
-	}
+	};
 
 	startScreen();
 
@@ -106,7 +104,6 @@ $(document).ready(function() {
 		$("#startStop").empty();
 		easyLevelQuestion(questionNumber);
 		timer();
-
 	});
 
 	function getRandomInt(min, max) {
@@ -157,8 +154,6 @@ $(document).ready(function() {
 
 		generateCorrectAnswerInteger = getRandomInt(0, 5);
 
-		console.log(generateCorrectAnswerInteger);
-
 		for (var a = 0; a < answerChoices.length; a++) {
 			
 			if (a !== generateCorrectAnswerInteger) {
@@ -198,7 +193,8 @@ $(document).ready(function() {
 
 		//alert($(this).data("color"));
 		selectedAnswer = $(this).data("color");
-		if(selectedAnswer === answerChoices[generateCorrectAnswerInteger]) {
+
+		if (selectedAnswer === answerChoices[generateCorrectAnswerInteger]) {
 			//alert("correct");
 			answersRight++;
 			clearInterval(theClock);
@@ -240,14 +236,13 @@ $(document).ready(function() {
 		score = "<p class='finalScore'>Here's how you did!<br>Correct Answers: " + answersRight 
 		+ "<br>Incorrect Answers: " + answersWrong + "<br>Unanswered: " + unanswered + "</p>";
 		$("#startStop").html(score);
-		$(".color").empty();
 		$(".color").removeAttr('style');
+		$("#timer").html("");
 		$("#question").empty();
 
 		resetButton = "<p class='resetClickEvent'><a href='#'>Reset Quiz</a></p>";
 		$("#startStop").append(resetButton);
-
-	}
+	};
 
 	$("body").on("click", ".resetClickEvent", function(event){
 		reset();
