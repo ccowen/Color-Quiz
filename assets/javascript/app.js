@@ -6,6 +6,7 @@ $(document).ready(function() {
 	var questionNumber = 0;
 	var startButton;
 	var counter = 30;
+	var theClock;
 
 	// variables from easy function
 	var answerChoices = [];
@@ -195,6 +196,7 @@ $(document).ready(function() {
 			//alert("correct");
 			answersRight++;
 			clearInterval(theClock);
+			$("#q" + [questionNumber]+ "Box").css('background-color', selectedAnswer);
 		}
 
 		else {
