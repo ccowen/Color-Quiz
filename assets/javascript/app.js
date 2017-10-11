@@ -203,6 +203,9 @@ $(document).ready(function() {
 			//alert("wrong answer!");
 			answersWrong++;
 			clearInterval(theClock);
+			$("#q" + [questionNumber]+ "Box").css('background-color', answerChoices[generateCorrectAnswerInteger]);
+			$("#q" + [questionNumber]+ "BoxSmall").css('background-color', selectedAnswer);
+
 		}
 
 		nextQuestion();

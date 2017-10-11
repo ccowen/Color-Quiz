@@ -3,6 +3,7 @@
 	font-size: 80px;
 	margin: 10px 10px 20px 0px;
 	float: left;
+	width: 55%;
 }
 
 #q0Box,
@@ -15,11 +16,29 @@
 #q7Box,
 #q8Box,
 #q9Box {
-	width: 30px;
+	width: 3%;
 	height: 80px;
 	float: left;
-	margin: 10px 0px 20px 20px;
-	background-color: black;
+	margin: 10px 0px 20px 1%;
+	position: relative;
+}
+
+#q0BoxSmall,
+#q1BoxSmall,
+#q2BoxSmall,
+#q3BoxSmall,
+#q4BoxSmall,
+#q5BoxSmall,
+#q6BoxSmall,
+#q7BoxSmall,
+#q8BoxSmall,
+#q9BoxSmall {
+	width: 99%;
+	height: 40px;
+	float: left;
+	margin: 0px 0px 0px 1%;
+	position: absolute;
+	top: 0px;
 }
 
 #question,
