@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var unanswered = 0;
 	var questionNumber = 0;
 	var startButton;
+	var resetButton;
 	var counter = 30;
 	var theClock;
 
@@ -19,6 +20,8 @@ $(document).ready(function() {
 		answersWrong = 0;
 		unanswered = 0;
 		questionNumber = 0;
+		counter = 30;
+		theClock;
 		
 		questionArray = [
 
@@ -34,6 +37,11 @@ $(document).ready(function() {
 			generateRandomColor()
 
 		];
+
+		for (var i = 0; i < 10; i++) {
+			$("#q" + [i]+ "Box").css('background-color', "");
+			$("#q" + [i]+ "BoxSmall").css('background-color', "");
+		}
 
 	};
 
@@ -60,7 +68,6 @@ $(document).ready(function() {
 		nextQuestion();
 	};
 
-	// function for generating a random color
 	function generateRandomColor() {
 
 		// random color picker and variables 
@@ -69,7 +76,6 @@ $(document).ready(function() {
 
 	};
 
-	// question array, ten questions total
 	var questionArray = [
 
 		generateRandomColor(),
@@ -205,7 +211,6 @@ $(document).ready(function() {
 			clearInterval(theClock);
 			$("#q" + [questionNumber]+ "Box").css('background-color', answerChoices[generateCorrectAnswerInteger]);
 			$("#q" + [questionNumber]+ "BoxSmall").css('background-color', selectedAnswer);
-
 		}
 
 		nextQuestion();
@@ -221,7 +226,6 @@ $(document).ready(function() {
 			//generate questions
 			easyLevelQuestion(questionNumber);
 			timer();
-
 		}
 
 		else {
