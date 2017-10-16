@@ -1,1 +1,1 @@
-# triviaGame
+# Color Trivia
