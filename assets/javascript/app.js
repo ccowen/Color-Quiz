@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+	// global variables
 	var answersRight = 0;
 	var answersWrong = 0;
 	var unanswered = 0;
@@ -9,12 +10,13 @@ $(document).ready(function() {
 	var counter = 30;
 	var theClock;
 
-	// variables from easy function
+	// variables from easyLevelQuestion function, all questions 'easy'
 	var answerChoices = [];
 	var generateCorrectAnswerInteger;
 	var questionColor;
 	var questionText;
 
+	// reset variables for new game
 	function reset() {
 		answersRight = 0;
 		answersWrong = 0;
@@ -23,6 +25,7 @@ $(document).ready(function() {
 		counter = 30;
 		theClock;
 		
+		// new colors for new quiz
 		questionArray = [
 
 			generateRandomColor(),
@@ -38,6 +41,7 @@ $(document).ready(function() {
 
 		];
 
+		// reset answer feedback (tabs at top right)
 		for (var i = 0; i < 10; i++) {
 			$("#q" + [i] + "Box").css('background-color', "");
 			$("#q" + [i] + "BoxSmall").css('background-color', "");
@@ -45,6 +49,7 @@ $(document).ready(function() {
 
 	};
 
+	// timer, 30 seconds
 	function timer() {
 		theClock = setInterval(thirtySeconds, 1000);
 		counter = 30;
@@ -62,12 +67,14 @@ $(document).ready(function() {
 		}
 	};
 
+	// function for when the time runs out
 	function LossDueToTimeOut() {
 		unanswered++;
 		clearInterval(theClock);
 		nextQuestion();
 	};
 
+	// function to generate a random color
 	function generateRandomColor() {
 
 		// random color picker and variables 
@@ -76,6 +83,7 @@ $(document).ready(function() {
 
 	};
 
+	// array holding ten random colors for ten questions
 	var questionArray = [
 
 		generateRandomColor(),
@@ -91,21 +99,28 @@ $(document).ready(function() {
 
 	];
 
+	// the start screen, with start button
 	function startScreen() {
 
 		startButton = "<p class='startClickEvent'><a href='#'>Start Quiz</a></p>";
 		$("#startStop").html(startButton);
 
+		// hide the answer div so the game is not started automatically on accident
+		document.getElementById("answers").style.display = "none";
+
 	};
 
+	// start game screen on page load
 	startScreen();
 
+	// start button
 	$(".startClickEvent").on("click", function(event){
 		$("#startStop").empty();
 		easyLevelQuestion(questionNumber);
 		timer();
 	});
 
+	// get a random int, parameters as min and max
 	function getRandomInt(min, max) {
 
 	  min = Math.ceil(min);
@@ -114,6 +129,7 @@ $(document).ready(function() {
 
 	};
 
+	// get the rgb values from hex color
 	function hexToRgb(hex) {
 
 	    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -131,7 +147,10 @@ $(document).ready(function() {
 
 	}
 
+	// easy level question, though they are all 'easy'
 	function easyLevelQuestion(x) {
+
+		document.getElementById("answers").style.display = "block";
 
 		questionColor = questionArray[x];
 	 
@@ -193,18 +212,22 @@ $(document).ready(function() {
 
 		//alert($(this).data("color"));
 		selectedAnswer = $(this).data("color");
-
+		
 		if (selectedAnswer === answerChoices[generateCorrectAnswerInteger]) {
-			//alert("correct");
+			// add one to right answer tally
 			answersRight++;
+			// reset the clock
 			clearInterval(theClock);
+			// answer feedback (top right), right so one color tab
 			$("#q" + [questionNumber]+ "Box").css('background-color', selectedAnswer);
 		}
 
 		else {
-			//alert("wrong answer!");
+			//add one to wrong answer tally
 			answersWrong++;
+			// reset the clock
 			clearInterval(theClock);
+			// answer feedback (top right), wrong so two color tab
 			$("#q" + [questionNumber]+ "Box").css('background-color', answerChoices[generateCorrectAnswerInteger]);
 			$("#q" + [questionNumber]+ "BoxSmall").css('background-color', selectedAnswer);
 		}
@@ -213,8 +236,10 @@ $(document).ready(function() {
 
 	});
 
+	// go to the next question
 	function nextQuestion() {
 
+		// if not the last question, continue to the next question
 		if (questionNumber < 9) {
 
 			questionNumber++;
@@ -224,6 +249,7 @@ $(document).ready(function() {
 			timer();
 		}
 
+		// it is the last question, time to get the final score
 		else {
 
 			finalScore();
@@ -231,8 +257,13 @@ $(document).ready(function() {
 
 	}
 
+	// display final score, the game has ended
 	function finalScore(){
 
+		// none so that users will not accidentally 'answer', would add to their tally
+		document.getElementById("answers").style.display = "none";
+
+		// display score
 		score = "<p class='finalScore'>Here's how you did!<br>Correct Answers: " + answersRight 
 		+ "<br>Incorrect Answers: " + answersWrong + "<br>Unanswered: " + unanswered + "</p>";
 		$("#startStop").html(score);
@@ -240,10 +271,12 @@ $(document).ready(function() {
 		$("#timer").html("");
 		$("#question").empty();
 
+		// create reset button
 		resetButton = "<p class='resetClickEvent'><a href='#'>Reset Quiz</a></p>";
 		$("#startStop").append(resetButton);
 	};
 
+	// reset button actions on click
 	$("body").on("click", ".resetClickEvent", function(event){
 		reset();
 		$("#startStop").empty();
