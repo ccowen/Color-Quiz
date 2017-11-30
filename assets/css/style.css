@@ -1,3 +1,8 @@
+/* ------------------ header, title and answer feedback ---- */
+#myTitleDiv {
+	padding-top: 20px;
+}
+
 #title {
 	font-family: 'Fredericka the Great', cursive;
 	font-size: 80px;
@@ -6,6 +11,7 @@
 	width: 55%;
 }
 
+/* the full box */
 #q0Box,
 #q1Box,
 #q2Box,
@@ -23,6 +29,7 @@
 	position: relative;
 }
 
+/* the small in the bigger box, apparent if incorrect answer is chosen */
 #q0BoxSmall,
 #q1BoxSmall,
 #q2BoxSmall,
@@ -40,6 +47,7 @@
 	top: 0px;
 }
 
+/* ------------------ text and answer divs ---- */
 #question,
 #startStop {
 	font-family: 'Josefin Slab', serif;
