@@ -1,3 +1,3 @@
-## [demo](https://ccowen.github.io/colorQuiz/)
+## Color Quiz [demo](https://ccowen.github.io/colorQuiz/)
 
-![Color Trivia GIF](assets/colorQuizGIF_randomTiming.gif?raw=true "Title")
+![Color Quiz GIF](assets/colorQuizGIF_randomTiming.gif?raw=true "Title")
